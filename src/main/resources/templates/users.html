@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link href="https://getbootstrap.com/docs/4.4/examples/dashboard/" rel="canonical">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="../static/css/jumbotron.css" rel="stylesheet" th:href="@{/css/jumbotron.css}">
+    <link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}">
+    <link href="../static/css/dashboard.css" rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <title>Users</title>
+</head>
+<body>
+
+<!--<h1>USERS, USERS EVERYWHERE!!!</h1>-->
+
+<div th:replace="fragments/header :: header"/>
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div th:replace="fragments/sidebar :: sidebar"></div>
+
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="container-fluid">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>User login</th>
+                                <th>User password</th>
+                                <th>Creation date</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="user: ${users}" th:object="${user}">
+                                <td class="pt-3" th:text="*{id}"/>
+                                <td class="pt-3" th:text="*{user_login}"/>
+                                <td class="pt-3" th:text="*{user_password}"/>
+                                <td class="pt-3" th:text="*{created_at}"/>
+
+                                <!--car-rent-app -> resources/templates/users ver.51-->
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <!--<form method="get" th:action="@{|/users/updateUser/${user.id}|}">-->
+                                        <!--<button class="btn btn-outline-primary btn-sm" type="submit">Edit</button>-->
+                                        <!--</form>-->
+                                        <form class="pl-1" method="GET" th:action="@{|users/editUser/${user.id}|}">
+                                            <button class="btn btn-info"
+                                                    type="submit">Edit user
+                                            </button>
+                                        </form>
+                                        <form class="pl-1" method="POST" th:action="@{|users/deleteUser/${user.id}|}">
+                                            <button class="btn btn-outline-danger btn-sm"
+                                                    onclick="if (!(confirm('Are you sure you want to delete this contact?'))) return false"
+                                                    type="submit">Delete user
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--<a class="btn btn-outline-success btn-sm" href="#" th:href="@{/users/addUser}">Add user</a>-->
+                </div>
+            </main>
+        </div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
