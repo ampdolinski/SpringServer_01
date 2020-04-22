@@ -50,14 +50,15 @@ public class UserPanelController {
         model.addAttribute("username", userName);
     }
 
-        @PostMapping("/changePassword")
+    @PostMapping("/changePassword")
     public String changePassword(@RequestParam("oldPassword") String oldPassword,
                                  @RequestParam("newPassword") String newPassword,
-                                 @RequestParam("confirmPassword") String confirmPassword, Model model){
+                                 @RequestParam("confirmPassword") String confirmPassword, Model model) {
 
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
         try {
-            userService.changePassword(userName ,oldPassword, newPassword, confirmPassword);
+            userService.changePassword(userName, oldPassword, newPassword, confirmPassword);
         } catch (UserNotFoundException | PasswordsDoNotMatchException | WrongOldPasswordException e) {
             e.getMessage();
             e.printStackTrace();
@@ -66,14 +67,15 @@ public class UserPanelController {
                     new SystemMessage("Warning", e.getMessage()));
             return "message";
         }
-            model.addAttribute("url", "/userPanel/changePassword");
-            model.addAttribute("message",
-                    new SystemMessage("Success", "Password has been changed"));
-            return "message";
+
+        model.addAttribute("url", "/userPanel/changePassword");
+        model.addAttribute("message",
+                new SystemMessage("Success", "Password has been changed"));
+        return "message";
     }
 
     @GetMapping("/changePassword")
-    public String returnSomething(){
+    public String returnSomething() {
         return "change-password";
     }
 

@@ -11,18 +11,17 @@
     <link href="../static/css/jumbotron.css" rel="stylesheet" th:href="@{/css/jumbotron.css}">
     <link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}">
     <link href="../static/css/dashboard.css" rel="stylesheet" th:href="@{/css/dashboard.css}">
-    <title>Users</title>
+    <title>Server</title>
 </head>
 <body>
-
-<!--<h1>USERS, USERS EVERYWHERE!!!</h1>-->
 
 <div th:replace="fragments/header :: header"/>
 
 <main>
     <div class="container-fluid">
         <div class="row">
-            <div th:replace="fragments/sidebar :: sidebar"></div>
+            <div th:replace="fragments/sidebar :: sidebar">
+            </div>
 
             <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div class="container-fluid">
@@ -31,34 +30,12 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>User login</th>
+                                <th>Server login</th>
                                 <th>Creation date</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
 
-                            <tbody>
-                            <tr th:each="user: ${users}" th:object="${user}">
-                                <td class="pt-3" th:text="*{id}"/>
-                                <td class="pt-3" th:text="*{userLogin}"/>
-                                <td class="pt-3" th:text="*{createdAt}"/>
-
-                                <!--car-rent-app -> resources/templates/users ver.51-->
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <!--<form method="get" th:action="@{|/users/updateUser/${user.id}|}">-->
-                                        <!--<button class="btn btn-outline-primary btn-sm" type="submit">Edit</button>-->
-                                        <!--</form>-->
-                                        <form class="pl-1" method="POST" th:action="@{|users/deleteUser/${user.id}|}">
-                                            <button class="btn btn-outline-danger btn-sm"
-                                                    onclick="if (!(confirm('Are you sure you want to delete this contact?'))) return false"
-                                                    type="submit">Delete user
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
                         </table>
                     </div>
                 </div>
