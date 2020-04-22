@@ -10,9 +10,13 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DBHOSTNAME}:3306/${DBSCHEMA}"/>
-            <property name="javax.persistence.jdbc.user" value="${DBUSERNAME}"/>
-            <property name="javax.persistence.jdbc.password" value="${DBPASSWORD}"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://eu-cdbr-west-03.cleardb.net:3306/heroku_b3f552068d9ae80"/>
+            <property name="javax.persistence.jdbc.user" value="b4d382170cea4e"/>
+            <property name="javax.persistence.jdbc.password" value="16f170d3"/>
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${DBHOSTNAME}:3306/${DBSCHEMA}"/>-->
+<!--            <property name="javax.persistence.jdbc.user" value="${DBUSERNAME}"/>-->
+<!--            <property name="javax.persistence.jdbc.password" value="${DBPASSWORD}"/>-->
+
 
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
