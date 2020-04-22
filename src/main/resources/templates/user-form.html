@@ -32,11 +32,11 @@
                             <form action="#" method="post" th:action="@{/users/saveUser}" th:object="${user}">
                                 <input th:field="*{id}" type="hidden"/>
                                 <input th:field="*{role}" type="hidden"/>
-                                <input th:field="*{username}" type="hidden"/>
+                                <input th:field="*{userLogin}" type="hidden"/>
                                 <input th:field="*{userPassword}" type="hidden"/>
 
                                 <label style="font-weight: bold; font-size: 14px">USER NAME</label>
-                                <input class="form-control mb-3 col-4" placeholder="Login" th:field="*{username}"
+                                <input class="form-control mb-3 col-4" placeholder="Login" th:field="*{userLogin}"
                                        type="text"/>
 
                                 <label style="font-weight: bold; font-size: 14px">USER PASSWORD</label>

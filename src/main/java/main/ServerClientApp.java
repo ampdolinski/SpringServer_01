@@ -11,8 +11,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableAsync
-public class MainV10 {
+public class ServerClientApp {
     public static void main(String[] args) {
-        SpringApplication.run(MainV10.class, args);
+        SpringApplication.run(ServerClientApp.class, args);
     }
 }

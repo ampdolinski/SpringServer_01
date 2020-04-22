@@ -14,7 +14,16 @@
                     <a class="nav-link" href="#" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#" th:href="@{/fleet}">Users <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#" th:href="@{/users}">Users <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <form method="post" th:action="@{/server}">
+                        <div sec:authorize="hasRole('ROLE_SERVER')">
+                            <button class="btn btn-link nav-link" style="color: white" type="submit">
+                                <span sec:authentication="name">Bob</span>
+                            </button>
+                        </div>
+                    </form>
                 </li>
             </ul>
 
