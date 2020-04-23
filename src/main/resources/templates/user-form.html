@@ -43,9 +43,13 @@
                                 <input class="form-control mb-3 col-4" placeholder="Password" th:field="*{userPassword}"
                                        type="text"/>
 
+
                                 <label style="font-weight: bold; font-size: 14px">CREATED AT</label>
-                                <input class="form-control mb-3 col-4" placeholder="Created at" th:field="*{createdAt}"
-                                       type="text"/>
+                                <input class="form-control mb-3 col-4" placeholder="Created at"
+                                       th:field="*{createdAt}"
+                                       type="date"
+                                       readonly="readonly"/>
+
 
                                 <input class="btn btn-outline-secondary col-2 mt-1" type="submit" value="Save"/>
                             </form>

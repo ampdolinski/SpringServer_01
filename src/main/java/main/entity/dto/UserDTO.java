@@ -1,9 +1,9 @@
 package main.entity.dto;
 
-import main.entity.Role;
 import lombok.Data;
+import main.entity.Role;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * @author Adam Doliński
@@ -17,5 +17,5 @@ public class UserDTO {
     private String userLogin;
     private String userPassword;
     private Role role;
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 }

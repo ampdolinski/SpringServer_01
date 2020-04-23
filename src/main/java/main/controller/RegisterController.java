@@ -1,9 +1,9 @@
 package main.controller;
 
+import lombok.AllArgsConstructor;
 import main.entity.Role;
 import main.entity.dto.UserDTO;
 import main.service.UserService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * @author Adam Doliński
@@ -43,7 +43,7 @@ public class RegisterController {
             return "register-form";
         else {
             userDto.setRole(Role.USER);
-            userDto.setCreatedAt(LocalDateTime.now());
+            userDto.setCreatedAt(LocalDate.now());
             userService.saveUser(userDto);
             return "redirect:/login-form";
         }

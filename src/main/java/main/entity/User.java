@@ -4,7 +4,7 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * @author Adam Doliński
@@ -34,7 +34,7 @@ public class User {
     private Role role;
 
     @Column(name = "created_at")
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
-    private LocalDateTime createdAt;
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    private LocalDate createdAt;
 }
 

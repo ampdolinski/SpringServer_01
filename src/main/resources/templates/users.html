@@ -46,9 +46,9 @@
                                 <!--car-rent-app -> resources/templates/users ver.51-->
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <!--<form method="get" th:action="@{|/users/updateUser/${user.id}|}">-->
-                                        <!--<button class="btn btn-outline-primary btn-sm" type="submit">Edit</button>-->
-                                        <!--</form>-->
+                                        <form method="get" th:action="@{|/users/${user.id}|}">
+                                            <button class="btn btn-outline-primary btn-sm" type="submit">Talk</button>
+                                        </form>
                                         <form class="pl-1" method="POST" th:action="@{|users/deleteUser/${user.id}|}">
                                             <button class="btn btn-outline-danger btn-sm"
                                                     onclick="if (!(confirm('Are you sure you want to delete this contact?'))) return false"
