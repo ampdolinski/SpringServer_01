@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/", "/login-form", "/register").permitAll()
-                .antMatchers("/userPanel", "/users").hasRole("USER")
+                .antMatchers("/userPanel", "/users").hasAnyRole("USER", "SERVER")
                 .antMatchers("/server").hasRole("SERVER")
                 .and()
                 .formLogin().loginPage("/login-form").permitAll() // przekierowanie na widok logowania
