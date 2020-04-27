@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -43,16 +43,20 @@
                                 <td class="pt-3" th:text="*{userLogin}"/>
                                 <td class="pt-3" th:text="*{createdAt}"/>
 
-                                <!--car-rent-app -> resources/templates/users ver.51-->
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <form method="get" th:action="@{|/users/${user.id}|}">
-                                            <button class="btn btn-outline-primary btn-sm" type="submit">Talk</button>
+                                        <form method="get" th:action="@{|/users/talkingWith=${user.id}|}">
+                                            <button class="btn btn-outline-primary btn-sm" type="submit">Talk with</button>
                                         </form>
+                                    </div>
+                                </td>
+                                <td sec:authorize="hasRole('SERVER')">
+                                    <div class="d-flex justify-content-center">
                                         <form class="pl-1" method="POST" th:action="@{|users/deleteUser/${user.id}|}">
                                             <button class="btn btn-outline-danger btn-sm"
                                                     onclick="if (!(confirm('Are you sure you want to delete this contact?'))) return false"
-                                                    type="submit">Delete user
+                                                    type="submit"
+                                            >Delete user
                                             </button>
                                         </form>
                                     </div>
