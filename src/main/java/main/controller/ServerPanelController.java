@@ -1,18 +1,16 @@
 package main.controller;
 
+import main.ConstantsPackage;
 import main.common.SystemMessage;
-import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.core.env.MapPropertySource;
-import org.springframework.integration.ip.tcp.connection.AbstractServerConnectionFactory;
+import org.springframework.integration.ip.tcp.TcpOutboundGateway;
+import org.springframework.integration.ip.tcp.TcpReceivingChannelAdapter;
+import org.springframework.integration.ip.tcp.TcpSendingMessageHandler;
+import org.springframework.integration.ip.tcp.connection.TcpNioServerConnectionFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.SocketUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class ServerPanelController {
@@ -37,39 +35,37 @@ public class ServerPanelController {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private static final String AVAILABLE_SERVER_SOCKET = "availableServerSocket";
+    private TcpSendingMessageHandler tcpSendingMessageHandler = new TcpSendingMessageHandler();
+    private TcpOutboundGateway tcpOutboundGateway = new TcpOutboundGateway();
+    private TcpReceivingChannelAdapter tcpReceivingChannelAdapter = new TcpReceivingChannelAdapter();
+    public TcpNioServerConnectionFactory tcpNioServerConnectionFactory;
 
-    public void startingServer() {
-        final GenericXmlApplicationContext context = ServerPanelController.setupContext();
-        final SimpleGatewayController gateway = context.getBean(SimpleGatewayController.class);
-        final AbstractServerConnectionFactory crLfServer = context.getBean(AbstractServerConnectionFactory.class);
+    //create an asynchronous server socket channel
+    public void firstFunctionFromSpringIntegrationTCPIP() {
+
+        tcpNioServerConnectionFactory.setPort(ConstantsPackage.DEFAULT_PORT);
+        tcpNioServerConnectionFactory.run();
+
+        whatToDoWhenServerSocketIsOpenOrNot();
 
     }
 
-    private static GenericXmlApplicationContext setupContext() {
+    private void whatToDoWhenServerSocketIsOpenOrNot() {
+        assert tcpNioServerConnectionFactory.isRunning();
 
-        final GenericXmlApplicationContext context = new GenericXmlApplicationContext();
+        System.out.print("TcpNioServerConnectionFactory Channel is open.\n");
 
-        if (System.getProperty(AVAILABLE_SERVER_SOCKET) == null) {
-            System.out.print("Detect open server socket...");
-            int availableServerSocket = SocketUtils.findAvailableTcpPort(5678);
+        //optional - options of server socket channel
+        tcpNioServerConnectionFactory.setSoReceiveBufferSize(ConstantsPackage.DEFAULT_BUFFER_BYTE_SIZE);
+        tcpNioServerConnectionFactory.setSoSendBufferSize(ConstantsPackage.DEFAULT_BUFFER_BYTE_SIZE);
+        tcpNioServerConnectionFactory.setSoTimeout(ConstantsPackage.DEFAULT_TIMEOUT_LIMIT);
 
-            final Map<String, Object> sockets = new HashMap<>();
-            sockets.put(AVAILABLE_SERVER_SOCKET, availableServerSocket);
+        startWaitingForIncomingClients();
 
-            final MapPropertySource propertySource = new MapPropertySource("sockets", sockets);
+    }
 
-            context.getEnvironment().getPropertySources().addLast(propertySource);
-        }
-
-        System.out.println("using port " + context.getEnvironment().getProperty(AVAILABLE_SERVER_SOCKET));
-
-        context.load("classpath:application.properties");
-        context.registerShutdownHook();
-        context.refresh();
-
-        return context;
-
+    private void startWaitingForIncomingClients() {
+        acceptRequestedClient();
     }
 
 
