@@ -8,6 +8,4 @@ public class EchoService {
         }
         return "echo:" + input;
     }
-
-
 }
